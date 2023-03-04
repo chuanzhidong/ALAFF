@@ -26,7 +26,7 @@ function [ A_out, p_out ] = LUpiv_right_looking( A )
                                     1, 'FLA_BOTTOM' );
 
     %------------------------------------------------------------%
-
+    pi1 = 
 
 
 

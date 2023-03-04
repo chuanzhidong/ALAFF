@@ -13,7 +13,9 @@ function [ A_out ] = Chol_right_looking( A )
                                                     1, 1, 'FLA_BR' );
 
     %------------------------------------------------------------%
-
+    alpha11 = sqrt(alpha11);
+    a21 = a21/alpha11;
+    A22 = A22 - tril( a21 * a21' );
 
 
 
