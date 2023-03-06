@@ -1,4 +1,6 @@
-close all
+close all;
+clear all;
+clc;
 
 % Set number of iterations to be performed
 nk = 300

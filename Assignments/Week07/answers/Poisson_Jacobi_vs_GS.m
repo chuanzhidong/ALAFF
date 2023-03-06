@@ -69,7 +69,7 @@ for k = 1:nk
     axis( [ 0 1 0 1 -0.05 0.05 ])
     
     % wait to continue to the next iteration
-    next = input( 'press RETURN to continue' );
+%     next = input( 'press RETURN to continue' );
 end
 
 
