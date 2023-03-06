@@ -1,7 +1,7 @@
 close all
 
 % Set number of iterations to be performed
-nk = 500
+nk = 300
 
 % Set parameters alpha and beta
 alpha = 2;
@@ -31,42 +31,22 @@ for i=1:N+2
     end
 end
 
-% Set the initial values at the mesh points.  Use J to indicate
-% the array for the Jacobi iteration.  Use GS to indicate the array
-% is for the Gauss-Seidel iteration.
-J = zeros( N+2, N+2 );
-GS = zeros( N+2, N+2 );
+% Set the initial values at the mesh points
+U = zeros( N+2, N+2 );
 
 % Perform nk iterations
 for k = 1:nk
     k           % print current iteration index
-    Jold = J;   % we want to use the old values
+    Uold = U;   % we want to use the old values
     
-    % update all the interior points (Jacobi iteration)
+    % update all the interior points
     for i=2:N+1
         for j=2:N+1
-            J( i,j ) = ( Jold( i, j-1 ) + Jold( i-1, j ) + Jold( i+1, j ) + Jold( i, j+1 ) + h^2 * F( i, j ) ) / 4;
+            U( i,j ) = (h^2*F(i,j) + U(i, j-1) + U(i-1, j) + U(i+1, j) + U(i, j+1))/4;% complete this update
         end
     end 
-    
-    subplot( 3, 1, 1 );  % plot in top graph
-    mesh( x, y, J );
+    mesh( x, y, U );
     axis( [ 0 1 0 1 -1.5 1.5 ]);
-
-    % update all the interior points (Gauss-Seidel iteration)
-    for i=2:N+1
-        for j=2:N+1
-            GS( i,j ) = ( GS( i, j-1 ) + GS( i-1, j ) + GS( i+1, j ) + GS( i, j+1 ) + h^2 * F( i, j ) ) / 4;
-        end
-    end 
-    
-    subplot( 3, 1, 2 );  % plot in bottom graph
-    mesh( x, y, GS );
-    axis( [ 0 1 0 1 -1.5 1.5 ]);
-    
-    subplot( 3, 1, 3);
-    mesh( x, y, GS - J );
-    axis( [ 0 1 0 1 -0.05 0.05 ])
     
     % wait to continue to the next iteration
 %     next = input( 'press RETURN to continue' );
